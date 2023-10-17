@@ -1,20 +1,23 @@
--- Reset of all tables of the bdd
-DROP TABLE IF EXISTS User;
+-- Be careful of FOREIGN KEY before droping table otherwise you will get an error.
+-- Drop first table with FOREIGN KEY then those with PRIMARY KEY.
+
+DROP TABLE IF EXISTS Invoice;
+DROP TABLE IF EXISTS Commande_Items;
+DROP TABLE IF EXISTS Cart_Items;
 DROP TABLE IF EXISTS Adress;
 DROP TABLE IF EXISTS Product;
 DROP TABLE IF EXISTS Cart;
-DROP TABLE IF EXISTS Cart_Items;
 DROP TABLE IF EXISTS Commande;
-DROP TABLE IF EXISTS Commande_Items;
-DROP TABLE IF EXISTS Invoice;
+DROP TABLE IF EXISTS User;
 
--- Creation of all the table of the BDD
+
+
 CREATE TABLE User (
     UserId INTEGER NOT NULL, 
     Name VARCHAR(50) NOT NULL, 
     FirstName VARCHAR(50) NOT NULL, 
     Email VARCHAR(70) NOT NULL, 
-    Password PASSWORD NOT NULL
+    Password VARCHAR(50) NOT NULL,
     PRIMARY KEY (UserId)
 );
 
@@ -76,4 +79,6 @@ CREATE TABLE Invoice (
 	CommandeId INTEGER NOT NULL,
 	PRIMARY KEY (InvoiceId),
 	FOREIGN KEY (CommandeId) REFERENCES Commande(CommandeId)
-); 
+);
+
+
