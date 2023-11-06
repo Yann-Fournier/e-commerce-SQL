@@ -1,5 +1,6 @@
 <?php
-    // Connecetion à la BDD
+    // Connecetion à la BDD --------------------------------------------------------------------------------------------------------------------------------------
+    
     $db_server = "localhost";
     $db_user = "root";
     $db_pass = "";
@@ -17,122 +18,150 @@
         echo "Could not connect! <br>";
     }
 
-    // Insetion des valeurs dans la database
+    // Créations des requetes d'insertions ---------------------------------------------------------------------------------------------------------------------
 
-    // "INSERT INTO users (user, password) VALUES ('$username', '$hash')";
-
+    //  OK
     $user = [
-
+        // "INSERT INTO User (UserId, Name, FirstName, Email, Password) VALUES ()" utiliser des ''
+        "INSERT INTO User (UserId, Name, FirstName, Email, Password) VALUES (1, 'Yann', 'Fournier', 'yann.yann@com', 'yann')",
+        "INSERT INTO User (UserId, Name, FirstName, Email, Password) VALUES (2, 'Shelby', 'Fournier', 'shelby.shelby@com', 'shelby')",
+        "INSERT INTO User (UserId, Name, FirstName, Email, Password) VALUES (3, 'Moka', 'Fournier', 'moka.moka@com', 'moka')"
     ];
     $adress = [
-
+        "INSERT INTO Adress (AdressId, UserId, Country, CodePostale, Number, Street, Town) VALUES (1, 1, 'France', 75000, 69, 'Avenue Foch', 'Paris')",
+        "INSERT INTO Adress (AdressId, UserId, Country, CodePostale, Number, Street, Town) VALUES (2, 2, 'France', 75000, 69, 'Avenue Foch', 'Paris')",
+        "INSERT INTO Adress (AdressId, UserId, Country, CodePostale, Number, Street, Town) VALUES (3, 3, 'France', 75000, 69, 'Avenue Foch', 'Paris')"
     ];
+    // OK
     $product = [
-
+        "INSERT INTO Product (ProductId, Name, Price, Description, Note, Nombre) VALUES (1, 'One piece 1', 7, 'Manga écrit par Eichiro Oda', 5, 43)",
+        "INSERT INTO Product (ProductId, Name, Price, Description, Note, Nombre) VALUES (2, 'One piece 2', 7, 'Manga écrit par Eichiro Oda', 4, 56)",
+        "INSERT INTO Product (ProductId, Name, Price, Description, Note, Nombre) VALUES (3, 'One piece 3', 7, 'Manga écrit par Eichiro Oda', 3, 69)",
+        "INSERT INTO Product (ProductId, Name, Price, Description, Note, Nombre) VALUES (4, 'One piece 4', 7, 'Manga écrit par Eichiro Oda', 2, 12)",
+        "INSERT INTO Product (ProductId, Name, Price, Description, Note, Nombre) VALUES (5, 'One piece 5', 7, 'Manga écrit par Eichiro Oda', 1, 4)"
     ];
+    // OK
     $commande = [
-
+        "INSERT INTO Commande (CommandeId, UserId) VALUES (1, 1)",
+        "INSERT INTO Commande (CommandeId, UserId) VALUES (2, 2)"
     ];
+    //  OK
     $cart = [
-
+        "INSERT INTO Cart (CartId, UserId) VALUES (1,3)"
     ];
+    // 0K
     $invoice = [
-
+        "INSERT INTO Invoice (InvoiceId, CommandeId) VALUES (1, 1)",
+        "INSERT INTO Invoice (InvoiceId, CommandeId) VALUES (2, 2)"
     ];
+    // OK
     $commande_items = [
-
+        "INSERT INTO Commande_Items (CommandeLineId, CommandeId, ProductId) VALUES (1, 1, 1)",
+        "INSERT INTO Commande_Items (CommandeLineId, CommandeId, ProductId) VALUES (2, 1, 2)",
+        "INSERT INTO Commande_Items (CommandeLineId, CommandeId, ProductId) VALUES (3, 1, 3)",
+        "INSERT INTO Commande_Items (CommandeLineId, CommandeId, ProductId) VALUES (4, 1, 4)",
+        "INSERT INTO Commande_Items (CommandeLineId, CommandeId, ProductId) VALUES (5, 2, 3)",
+        "INSERT INTO Commande_Items (CommandeLineId, CommandeId, ProductId) VALUES (6, 2, 4)",
+        "INSERT INTO Commande_Items (CommandeLineId, CommandeId, ProductId) VALUES (7, 2, 5)",
     ];
+    // OK
     $cart_items = [
-
+        "INSERT INTO Cart_Items (CartLineId, CartId, ProductId) VALUES (1, 1, 1)",
+        "INSERT INTO Cart_Items (CartLineId, CartId, ProductId) VALUES (2, 1, 2)",
+        "INSERT INTO Cart_Items (CartLineId, CartId, ProductId) VALUES (3, 1, 3)",
+        "INSERT INTO Cart_Items (CartLineId, CartId, ProductId) VALUES (4, 1, 4)",
+        "INSERT INTO Cart_Items (CartLineId, CartId, ProductId) VALUES (5, 1, 5)"
     ];
 
+    // Insetion des valeurs dans la database ------------------------------------------------------------------------------------------------------------
+    
     foreach($user as $values) {
-        // try {
-        //     mysqli_query($conn, $values);
-        // }
-        // catch(mysqli_sql_exception) {
-        //     echo "That username is taken";
-        // } 
+        try {
+            mysqli_query($conn, $values);
+        }
+        catch(mysqli_sql_exception) {
+            echo "User";
+        } 
     }
 
-    echo "table user remplie";
+    // echo "table user remplie ";
 
     foreach($adress as $values) {
-        // try {
-        //     mysqli_query($conn, $values);
-        // }
-        // catch(mysqli_sql_exception) {
-        //     echo "That username is taken";
-        // } 
+        try {
+            mysqli_query($conn, $values);
+        }
+        catch(mysqli_sql_exception) {
+            echo "Adress";
+        } 
     }
 
-    echo "table adress remplie";
+    // echo "table adress remplie ";
 
     foreach($product as $values) {
-        // try {
-        //     mysqli_query($conn, $values);
-        // }
-        // catch(mysqli_sql_exception) {
-        //     echo "That username is taken";
-        // } 
+        try {
+            mysqli_query($conn, $values);
+        }
+        catch(mysqli_sql_exception) {
+            echo "Product";
+        }
     }
 
-    echo "table product remplie";
+    // echo "table product remplie ";
 
     foreach($commande as $values) {
-        // try {
-        //     mysqli_query($conn, $values);
-        // }
-        // catch(mysqli_sql_exception) {
-        //     echo "That username is taken";
-        // } 
+        try {
+            mysqli_query($conn, $values);
+        }
+        catch(mysqli_sql_exception) {
+            echo "Commande";
+        } 
     }
 
-    echo "table commande remplie";
+    // echo "table commande remplie ";
 
     foreach($invoice as $values) {
-        // try {
-        //     mysqli_query($conn, $values);
-        // }
-        // catch(mysqli_sql_exception) {
-        //     echo "That username is taken";
-        // } 
+        try {
+            mysqli_query($conn, $values);
+        }
+        catch(mysqli_sql_exception) {
+            echo "Invoice";
+        } 
     }
 
-    echo "table invoice remplie";
+    // echo "table invoice remplie ";
 
 
     foreach($cart as $values) {
-        // try {
-        //     mysqli_query($conn, $values);
-        // }
-        // catch(mysqli_sql_exception) {
-        //     echo "That username is taken";
-        // } 
+        try {
+            mysqli_query($conn, $values);
+        }
+        catch(mysqli_sql_exception) {
+            echo "Cart";
+        } 
     }
 
-    echo "table cart remplie";
+    // echo "table cart remplie ";
 
 
     foreach($commande_items as $values) {
-        // try {
-        //     mysqli_query($conn, $values);
-        // }
-        // catch(mysqli_sql_exception) {
-        //     echo "That username is taken";
-        // } 
+        try {
+            mysqli_query($conn, $values);
+        }
+        catch(mysqli_sql_exception) {
+            echo "TCommande Items";
+        } 
     }
 
-    echo "table commande_items remplie";
+    // echo "table commande_items remplie ";
 
     foreach($cart_items as $values) {
-        // try {
-        //     mysqli_query($conn, $values);
-        // }
-        // catch(mysqli_sql_exception) {
-        //     echo "That username is taken";
-        // } 
+        try {
+            mysqli_query($conn, $values);
+        }
+        catch(mysqli_sql_exception) {
+            echo "Cart Items";
+        } 
     }
 
-    echo "table cart_items remplie";
+    // echo "table cart_items remplie ";
 ?>
