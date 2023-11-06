@@ -40,7 +40,6 @@ CREATE TABLE Product (
     Description VARCHAR(200) NOT NULL,
     Note INTEGER NOT NULL,
 	Nombre INTEGER NOT NULL,
-	Image INTEGER NOT NULL,
     PRIMARY KEY (ProductId)
 );
 
