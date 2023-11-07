@@ -73,6 +73,8 @@
         "INSERT INTO Cart_Items (CartLineId, CartId, ProductId) VALUES (5, 1, 5)"
     ];
 
+    $tables = [$user, $adress, $product, $commande, $cart, $invoice, $commande_items, $cart_items];
+
     // Insetion des valeurs dans la database ------------------------------------------------------------------------------------------------------------
     
     foreach($tables as $values) {
@@ -81,7 +83,7 @@
                 mysqli_query($conn, $query);
             }
             catch(mysqli_sql_exception) {
-                echo "User";
+                echo "Failed to insert data \n";
             } 
         }
     }
