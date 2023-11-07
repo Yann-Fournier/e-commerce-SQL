@@ -75,93 +75,14 @@
 
     // Insetion des valeurs dans la database ------------------------------------------------------------------------------------------------------------
     
-    foreach($user as $values) {
-        try {
-            mysqli_query($conn, $values);
-        }
-        catch(mysqli_sql_exception) {
-            echo "User";
-        } 
-    }
-
-    // echo "table user remplie ";
-
-    foreach($adress as $values) {
-        try {
-            mysqli_query($conn, $values);
-        }
-        catch(mysqli_sql_exception) {
-            echo "Adress";
-        } 
-    }
-
-    // echo "table adress remplie ";
-
-    foreach($product as $values) {
-        try {
-            mysqli_query($conn, $values);
-        }
-        catch(mysqli_sql_exception) {
-            echo "Product";
+    foreach($tables as $values) {
+        foreach($values as $query) {
+            try {
+                mysqli_query($conn, $query);
+            }
+            catch(mysqli_sql_exception) {
+                echo "User";
+            } 
         }
     }
-
-    // echo "table product remplie ";
-
-    foreach($commande as $values) {
-        try {
-            mysqli_query($conn, $values);
-        }
-        catch(mysqli_sql_exception) {
-            echo "Commande";
-        } 
-    }
-
-    // echo "table commande remplie ";
-
-    foreach($invoice as $values) {
-        try {
-            mysqli_query($conn, $values);
-        }
-        catch(mysqli_sql_exception) {
-            echo "Invoice";
-        } 
-    }
-
-    // echo "table invoice remplie ";
-
-
-    foreach($cart as $values) {
-        try {
-            mysqli_query($conn, $values);
-        }
-        catch(mysqli_sql_exception) {
-            echo "Cart";
-        } 
-    }
-
-    // echo "table cart remplie ";
-
-
-    foreach($commande_items as $values) {
-        try {
-            mysqli_query($conn, $values);
-        }
-        catch(mysqli_sql_exception) {
-            echo "TCommande Items";
-        } 
-    }
-
-    // echo "table commande_items remplie ";
-
-    foreach($cart_items as $values) {
-        try {
-            mysqli_query($conn, $values);
-        }
-        catch(mysqli_sql_exception) {
-            echo "Cart Items";
-        } 
-    }
-
-    // echo "table cart_items remplie ";
 ?>
