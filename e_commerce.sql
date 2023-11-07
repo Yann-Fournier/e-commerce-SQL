@@ -1,6 +1,12 @@
 -- Be careful of FOREIGN KEY before droping table otherwise you will get an error.
 -- Drop first table with FOREIGN KEY then those with PRIMARY KEY.
 
+DROP DATABASE IF EXISTS ecommerce;
+
+CREATE DATABASE ecommerce;
+
+USE ecommerce;
+
 DROP TABLE IF EXISTS Invoice;
 DROP TABLE IF EXISTS Commande_Items;
 DROP TABLE IF EXISTS Cart_Items;
