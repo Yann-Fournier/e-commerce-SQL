@@ -45,7 +45,7 @@ CREATE TABLE Product (
     Price INTEGER NOT NULL,
     Description VARCHAR(200) NOT NULL,
     Note INTEGER NOT NULL,
-	Nombre INTEGER NOT NULL,
+	Quantity INTEGER NOT NULL,
     PRIMARY KEY (ProductId)
 );
 

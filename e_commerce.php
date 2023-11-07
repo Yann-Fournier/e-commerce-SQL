@@ -56,7 +56,7 @@
             $p = $faker->numberBetween(10, 99);
             $note = $faker->numberBetween(0, 5);
             $nbr2 = $faker->numberBetween(10, 99);
-            $product_query = "INSERT INTO Product (ProductId, Name, Price, Description, Note, Nombre) VALUES ($id, '$nameproduit', $p, '$description', $note, $nbr2)";
+            $product_query = "INSERT INTO Product (ProductId, Name, Price, Description, Note, Quantity) VALUES ($id, '$nameproduit', $p, '$description', $note, $nbr2)";
             try {
                 mysqli_query($conn, $product_query);
             }
