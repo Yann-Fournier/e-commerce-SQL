@@ -1,90 +1,110 @@
 <?php
-    // Connecetion à la BDD --------------------------------------------------------------------------------------------------------------------------------------
+    // Import de faker
+    require('vendor/autoload.php');
+
+    function insert_data($nbr) {
+        
+        $faker = Faker\Factory::create('fr_FR');
+
+        // Connecetion à la BDD --------------------------------------------------------------------------------------------------------------------------------------
     
-    $db_server = "localhost";
-    $db_user = "root";
-    $db_pass = "";
-    $db_name = "ecommerce";
-    $conn = "";
+        $db_server = "localhost";
+        $db_user = "root";
+        $db_pass = "";
+        $db_name = "ecommerce";
+        $conn = "";
 
-    try {
-        $conn = mysqli_connect($db_server, 
-                            $db_user, 
-                            $db_pass, 
-                            $db_name);
-        echo "You are connected";
-    }
-    catch(mysqli_sql_exception) {
-        echo "Could not connect! <br>";
-    }
+        try {
+            $conn = mysqli_connect($db_server, 
+                                $db_user, 
+                                $db_pass, 
+                                $db_name);
+            echo "You are connected \n";
+        }
+        catch(mysqli_sql_exception) {
+            echo "Could not connect! <br>";
+        }
 
-    // Créations des requetes d'insertions ---------------------------------------------------------------------------------------------------------------------
+        for($i = 1; $i < $nbr+1; $i++) {
+            $id = 1*$i;
+            echo $id . "\n";
+            // Créations des requetes d'insertions ---------------------------------------------------------------------------------------------------------------------
 
-    //  OK
-    $user = [
-        // "INSERT INTO User (UserId, Name, FirstName, Email, Password) VALUES ()" utiliser des ''
-        "INSERT INTO User (UserId, Name, FirstName, Email, Password) VALUES (1, 'Yann', 'Fournier', 'yann.yann@com', 'yann')",
-        "INSERT INTO User (UserId, Name, FirstName, Email, Password) VALUES (2, 'Shelby', 'Fournier', 'shelby.shelby@com', 'shelby')",
-        "INSERT INTO User (UserId, Name, FirstName, Email, Password) VALUES (3, 'Moka', 'Fournier', 'moka.moka@com', 'moka')"
-    ];
-    $adress = [
-        "INSERT INTO Adress (AdressId, UserId, Country, CodePostale, Number, Street, Town) VALUES (1, 1, 'France', 75000, 69, 'Avenue Foch', 'Paris')",
-        "INSERT INTO Adress (AdressId, UserId, Country, CodePostale, Number, Street, Town) VALUES (2, 2, 'France', 75000, 69, 'Avenue Foch', 'Paris')",
-        "INSERT INTO Adress (AdressId, UserId, Country, CodePostale, Number, Street, Town) VALUES (3, 3, 'France', 75000, 69, 'Avenue Foch', 'Paris')"
-    ];
-    // OK
-    $product = [
-        "INSERT INTO Product (ProductId, Name, Price, Description, Note, Nombre) VALUES (1, 'One piece 1', 7, 'Manga écrit par Eichiro Oda', 5, 43)",
-        "INSERT INTO Product (ProductId, Name, Price, Description, Note, Nombre) VALUES (2, 'One piece 2', 7, 'Manga écrit par Eichiro Oda', 4, 56)",
-        "INSERT INTO Product (ProductId, Name, Price, Description, Note, Nombre) VALUES (3, 'One piece 3', 7, 'Manga écrit par Eichiro Oda', 3, 69)",
-        "INSERT INTO Product (ProductId, Name, Price, Description, Note, Nombre) VALUES (4, 'One piece 4', 7, 'Manga écrit par Eichiro Oda', 2, 12)",
-        "INSERT INTO Product (ProductId, Name, Price, Description, Note, Nombre) VALUES (5, 'One piece 5', 7, 'Manga écrit par Eichiro Oda', 1, 4)"
-    ];
-    // OK
-    $commande = [
-        "INSERT INTO Commande (CommandeId, UserId) VALUES (1, 1)",
-        "INSERT INTO Commande (CommandeId, UserId) VALUES (2, 2)"
-    ];
-    //  OK
-    $cart = [
-        "INSERT INTO Cart (CartId, UserId) VALUES (1,3)"
-    ];
-    // 0K
-    $invoice = [
-        "INSERT INTO Invoice (InvoiceId, CommandeId) VALUES (1, 1)",
-        "INSERT INTO Invoice (InvoiceId, CommandeId) VALUES (2, 2)"
-    ];
-    // OK
-    $commande_items = [
-        "INSERT INTO Commande_Items (CommandeLineId, CommandeId, ProductId) VALUES (1, 1, 1)",
-        "INSERT INTO Commande_Items (CommandeLineId, CommandeId, ProductId) VALUES (2, 1, 2)",
-        "INSERT INTO Commande_Items (CommandeLineId, CommandeId, ProductId) VALUES (3, 1, 3)",
-        "INSERT INTO Commande_Items (CommandeLineId, CommandeId, ProductId) VALUES (4, 1, 4)",
-        "INSERT INTO Commande_Items (CommandeLineId, CommandeId, ProductId) VALUES (5, 2, 3)",
-        "INSERT INTO Commande_Items (CommandeLineId, CommandeId, ProductId) VALUES (6, 2, 4)",
-        "INSERT INTO Commande_Items (CommandeLineId, CommandeId, ProductId) VALUES (7, 2, 5)",
-    ];
-    // OK
-    $cart_items = [
-        "INSERT INTO Cart_Items (CartLineId, CartId, ProductId) VALUES (1, 1, 1)",
-        "INSERT INTO Cart_Items (CartLineId, CartId, ProductId) VALUES (2, 1, 2)",
-        "INSERT INTO Cart_Items (CartLineId, CartId, ProductId) VALUES (3, 1, 3)",
-        "INSERT INTO Cart_Items (CartLineId, CartId, ProductId) VALUES (4, 1, 4)",
-        "INSERT INTO Cart_Items (CartLineId, CartId, ProductId) VALUES (5, 1, 5)"
-    ];
-
-    $tables = [$user, $adress, $product, $commande, $cart, $invoice, $commande_items, $cart_items];
-
-    // Insetion des valeurs dans la database ------------------------------------------------------------------------------------------------------------
-    
-    foreach($tables as $values) {
-        foreach($values as $query) {
+            $name = explode(" ",$faker->name);
+            $password = $faker->realText(15);
+            //  OK
+            $user_query = "INSERT INTO User (UserId, Name, FirstName, Email, Password) VALUES ($id, '$name[0]', '$name[1]', '$faker->email', '$password')";
             try {
-                mysqli_query($conn, $query);
+                mysqli_query($conn, $user_query);
             }
             catch(mysqli_sql_exception) {
-                echo "Failed to insert data \n";
+                echo "User_query \n";
+            } 
+
+            $cp = intval($faker->postcode, 10);
+            $n = $faker->numberBetween(10, 99);
+            $adress_query = "INSERT INTO Adress (AdressId, UserId, Country, CodePostale, Number, Street, Town) VALUES ($id, $id, '$faker->country', $cp, $n, '$faker->streetAddress', '$faker->city')";
+            try {
+                mysqli_query($conn, $adress_query);
+            }
+            catch(mysqli_sql_exception) {
+                echo "Adress_query \n";
+            }
+
+            $nameproduit = $faker->text(60);
+            $description = $faker->text(90);
+            $p = $faker->numberBetween(10, 99);
+            $note = $faker->numberBetween(0, 5);
+            $nbr2 = $faker->numberBetween(10, 99);
+            $product_query = "INSERT INTO Product (ProductId, Name, Price, Description, Note, Nombre) VALUES ($id, '$nameproduit', $p, '$description', $note, $nbr2)";
+            try {
+                mysqli_query($conn, $product_query);
+            }
+            catch(mysqli_sql_exception) {
+                echo "Product_query \n";
+            } 
+
+            $commande_query = "INSERT INTO Commande (CommandeId, UserId) VALUES ($id, $id)";
+            try {
+                mysqli_query($conn, $commande_query);
+            }
+            catch(mysqli_sql_exception) {
+                echo "Commande_query \n";
+            } 
+
+            $cart_query = "INSERT INTO Cart (CartId, UserId) VALUES ($id,$id)";
+            try {
+                mysqli_query($conn, $cart_query);
+            }
+            catch(mysqli_sql_exception) {
+                echo "Cart_query \n";
+            } 
+
+            $invoice_query = "INSERT INTO Invoice (InvoiceId, CommandeId) VALUES ($id, $id)";
+            try {
+                mysqli_query($conn, $invoice_query);
+            }
+            catch(mysqli_sql_exception) {
+                echo "Invoice_query \n";
+            } 
+
+            $commande_items_query ="INSERT INTO Commande_Items (CommandeLineId, CommandeId, ProductId) VALUES ($id, $id, $id)";
+            try {
+                mysqli_query($conn, $commande_items_query);
+            }
+            catch(mysqli_sql_exception) {
+                echo "Commande_items_query \n";
+            } 
+
+            $cart_items_query ="INSERT INTO Cart_Items (CartLineId, CartId, ProductId) VALUES ($id, $id, $id)";
+            try {
+                mysqli_query($conn, $cart_items_query);
+            }
+            catch(mysqli_sql_exception) {
+                echo "Cart_items_query \n";
             } 
         }
     }
+
+    insert_data(100);
 ?>
