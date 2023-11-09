@@ -4,12 +4,12 @@
 
 # Installation de faker pour php:
 
-Télécharger compare pour php depuis internet.
+Télécharger "compare" pour php depuis internet.
 
 Puis téléchager faker avec la commande: `compare req fakerphp/faker`
 
 Et modifier le fichier `vandor/src/Faker/Provider/Lorem.php`. 
-    -> inverser les paramètres fonctions join() dans les return des fonctions => join(' ', $variable).
+- inverser les paramètres fonctions join() dans les return des fonctions => join(' ', $variable).
 
 # Insertion de donnée:
 
