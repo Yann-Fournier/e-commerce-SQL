@@ -10,7 +10,7 @@ Puis téléchager faker avec la commande: `composer req fakerphp/faker`
 
 ### Si besoin :
 Modifier le fichier `vandor/fakerphp/faker/src/Faker/Provider/Lorem.php`. 
-- inverser les paramètres fonctions join() dans les return des fonctions => join(' ', $variable).
+- inverser les paramètres des fonctions join() dans les return des fonctions => join(' ', $variable).
 
 # Insertion de donnée:
 
