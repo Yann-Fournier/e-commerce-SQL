@@ -32,8 +32,9 @@
 
             $name = explode(" ",$faker->name);
             $password = $faker->realText(15);
+            $hash = password_hash($password, PASSWORD_DEFAULT);
             //  OK
-            $user_query = "INSERT INTO User (UserId, Name, FirstName, Email, Password) VALUES ($id, '$name[0]', '$name[1]', '$faker->email', '$password')";
+            $user_query = "INSERT INTO User (UserId, Name, FirstName, Email, Password) VALUES ($id, '$name[0]', '$name[1]', '$faker->email', '$hash')";
             try {
                 mysqli_query($conn, $user_query);
             }
